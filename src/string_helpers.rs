@@ -28,11 +28,11 @@ pub fn cut_white_beginning(text: &str) -> &str {
 pub fn split<'a>(input: &'a str, separator: &str) -> Vec<&'a str> {
     let mut result: Vec<&str> = Vec::new();
 
-    let mut next_regex_index = input.find(separator);
-    let regex_length = separator.len();
+    let mut next_index = input.find(separator);
+    let sep_len = separator.len();
     let mut offset = 0;
 
-    while let Some(index) = next_regex_index {
+    while let Some(index) = next_index {
         if index > offset {
             let element = cut_white_beginning(&input[offset..index]);
 
@@ -41,8 +41,8 @@ pub fn split<'a>(input: &'a str, separator: &str) -> Vec<&'a str> {
             }
         }
 
-        offset = index + regex_length;
-        next_regex_index = input[offset..]
+        offset = index + sep_len;
+        next_index = input[offset..]
             .find(separator)
             .map(|new_index| new_index + offset);
     }
