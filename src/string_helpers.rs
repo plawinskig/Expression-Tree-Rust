@@ -70,4 +70,9 @@ mod tests {
         let empty_res: Vec<&str> = Vec::new();
         assert_eq!(split("aaaaaa", "a"), empty_res);
     }
+
+    #[test]
+    fn test_cut_white_beginning_utf8() {
+        assert_eq!(cut_white_beginning("   żaba"), "żaba");
+    }
 }
