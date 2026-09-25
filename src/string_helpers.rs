@@ -27,14 +27,14 @@ pub fn cut_white_beginning(text: &str) -> &str {
 
 pub fn split<'a>(input: &'a str, separator: &str) -> Vec<&'a str> {
     let mut result = Vec::new();
-    
-    let mut tail = input; 
+
+    let mut tail = input;
     let sep_len = separator.len();
 
     while let Some(index) = tail.find(separator) {
-        let chunk = &tail[..index]; 
+        let chunk = &tail[..index];
         let element = cut_white_beginning(chunk);
-        
+
         if !element.is_empty() {
             result.push(element);
         }
@@ -49,8 +49,6 @@ pub fn split<'a>(input: &'a str, separator: &str) -> Vec<&'a str> {
 
     result
 }
-
-
 
 #[cfg(test)]
 mod tests {
@@ -74,7 +72,10 @@ mod tests {
     #[test]
     fn test_split() {
         assert_eq!(split("No changes here.", ","), ["No changes here."]);
-        assert_eq!(split("There is a   space between us.", " "), ["There", "is", "a", "space", "between", "us."]);
+        assert_eq!(
+            split("There is a   space between us.", " "),
+            ["There", "is", "a", "space", "between", "us."]
+        );
         let empty_res: Vec<&str> = Vec::new();
         assert_eq!(split("aaaaaa", "a"), empty_res);
     }
