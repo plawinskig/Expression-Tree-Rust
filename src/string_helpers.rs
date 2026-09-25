@@ -72,4 +72,11 @@ mod tests {
         assert_eq!(find_text("0123456789"), Some(0));
         assert_eq!(find_text("          "), None);
     }
+
+    #[test]
+    fn test_cut_white_beginning() {
+        assert_eq!(cut_white_beginning("     56789"), "56789");
+        assert_eq!(cut_white_beginning("0123456789"), "0123456789");
+        assert_eq!(cut_white_beginning("01234     "), "01234     ");
+    }
 }
