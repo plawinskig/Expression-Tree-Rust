@@ -26,33 +26,25 @@ pub fn cut_white_beginning(text: &str) -> &str {
 }
 
 pub fn split<'a>(input: &'a str, separator: &str) -> Vec<&'a str> {
-    let mut result: Vec<&str> = Vec::new();
-
-    let mut next_index = input.find(separator);
+    let mut result = Vec::new();
+    
+    let mut tail = input; 
     let sep_len = separator.len();
-    let mut offset = 0;
 
-    while let Some(index) = next_index {
-        if index > offset {
-            let element = cut_white_beginning(&input[offset..index]);
-
-            if ! element.is_empty() {
-                result.push(element);
-            }
-        }
-
-        offset = index + sep_len;
-        next_index = input[offset..]
-            .find(separator)
-            .map(|new_index| new_index + offset);
-    }
-
-    if offset < input.len() {
-        let element = cut_white_beginning(&input[offset..]);
-
-        if ! element.is_empty() {
+    while let Some(index) = tail.find(separator) {
+        let chunk = &tail[..index]; 
+        let element = cut_white_beginning(chunk);
+        
+        if !element.is_empty() {
             result.push(element);
         }
+
+        tail = &tail[index + sep_len..];
+    }
+
+    let element = cut_white_beginning(tail);
+    if !element.is_empty() {
+        result.push(element);
     }
 
     result
