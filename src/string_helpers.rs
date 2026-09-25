@@ -34,8 +34,7 @@ pub fn split<'a>(input: &'a str, separator: &str) -> Vec<&'a str> {
 
     while let Some(index) = next_regex_index {
         if index > offset {
-            let next_split = index - offset;
-            let element = cut_white_beginning(&input[offset..next_split]);
+            let element = cut_white_beginning(&input[offset..index]);
 
             if ! element.is_empty() {
                 result.push(element);
