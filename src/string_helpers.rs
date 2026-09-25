@@ -1,27 +1,18 @@
 pub fn find_text(text: &str) -> Option<usize> {
-    for (i, chr) in text.chars().enumerate() {
+    for (byte_pos, chr) in text.char_indices() {
         if !chr.is_whitespace() {
-            return Some(i);
+            return Some(byte_pos);
         }
     }
 
-    return None;
-}
-
-fn crop_letters(s: &str, pos: usize) -> &str {
-    match s.char_indices().skip(pos).next() {
-        Some((pos, _)) => &s[pos..],
-        None => "",
-    }
+    None
 }
 
 pub fn cut_white_beginning(text: &str) -> &str {
-    let pos = find_text(text);
-
-    match pos {
-        Some(pos) if pos > 0 => crop_letters(text, pos),
-        None if !text.is_empty() => "",
-        _ => text,
+    if let Some(byte_pos) = find_text(text) {
+        &text[byte_pos..]
+    } else {
+        ""
     }
 }
 
