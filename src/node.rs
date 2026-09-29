@@ -39,14 +39,14 @@ enum NodeType {
 
 struct Node<'a> {
     node_type: NodeType,
-    children: Vec<&'a Node<'a>>
+    children: Vec<&'a Node<'a>>,
 }
 
 impl Node<'_> {
     fn get_num_of_children(&self) -> i32 {
         match &self.node_type {
             NodeType::Val(_) | NodeType::Var(_) => 0,
-            NodeType::Op(operation) => operation.get_num_of_args()
+            NodeType::Op(operation) => operation.get_num_of_args(),
         }
     }
 }
