@@ -1,5 +1,7 @@
 #![allow(dead_code)]
 
+use crate::expression::Expression;
+
 struct Value {
     val: i32,
 }
@@ -48,5 +50,12 @@ impl Node<'_> {
             NodeType::Val(_) | NodeType::Var(_) => 0,
             NodeType::Op(operation) => operation.get_num_of_args(),
         }
+    }
+
+    fn load_node_and_children(&self, expression: Expression) -> Result<(), String> {
+        
+
+
+        Ok(())
     }
 }
