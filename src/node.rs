@@ -1,7 +1,5 @@
 #![allow(dead_code)]
 
-use std::ops::Deref;
-
 struct Value {
     val: i32,
 }
@@ -57,7 +55,10 @@ impl Node {
         }
     }
 
-    fn load_children(&mut self, mut expression: ExpressionTyped) -> Result<ExpressionTyped, String> {
+    fn load_children(
+        &mut self,
+        mut expression: ExpressionTyped,
+    ) -> Result<ExpressionTyped, String> {
         for _ in 0..self.get_num_of_children() {
             match expression {
                 ExpressionTyped::End => (),
@@ -65,7 +66,7 @@ impl Node {
                     let tail = *box_tail;
                     let mut child = Node {
                         node_type: head,
-                        children: None
+                        children: None,
                     };
                     expression = child.load_children(tail)?;
                 }
