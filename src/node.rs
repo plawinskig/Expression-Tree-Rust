@@ -76,6 +76,6 @@ impl Node {
                 }
             }
         }
-        Ok(ExpressionTyped::End)
+        Ok(expression)
     }
 }
