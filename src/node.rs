@@ -61,7 +61,7 @@ impl Node {
     ) -> Result<ExpressionTyped, String> {
         for _ in 0..self.get_num_of_children() {
             match expression {
-                ExpressionTyped::End => (),
+                ExpressionTyped::End => return Ok(ExpressionTyped::End),
                 ExpressionTyped::Token(head, box_tail) => {
                     let tail = *box_tail;
                     let mut child = Node {
