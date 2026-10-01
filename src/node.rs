@@ -70,9 +70,7 @@ impl Node {
                     };
                     expression = child.load_children(tail)?;
 
-                    self.children
-                        .get_or_insert_with(Vec::new)
-                        .push(child);
+                    self.children.get_or_insert_with(Vec::new).push(child);
                 }
             }
         }
