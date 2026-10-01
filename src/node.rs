@@ -133,9 +133,14 @@ mod tests {
         println!("{:#?}", expression);
 
         let mut root = Node { node_type: NodeType::Root, children: None};
-        let result_expression = root.load_children(expression);
+        let result_expression = root.load_children(expression).unwrap();
         
-        //assert_eq!(format!("{:#?}", result_expression), format!("{:#?}", ExpressionTyped::End));
+        assert_eq!(format!("{:#?}", result_expression), format!("{:#?}", ExpressionTyped::End));
         assert_eq!(format!("{:#?}", root), format!("{:#?}", correct_root));
+
+        // next time use
+        // assert!(matches!(result, Ok(ExpressionTyped::End)));
+        // or
+        // assert_eq!(result.unwrap(), ExpressionTyped::End);
     }
 }
