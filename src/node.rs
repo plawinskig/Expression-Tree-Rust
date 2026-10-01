@@ -73,9 +73,7 @@ impl Node {
                     match &mut self.children {
                         Some(children) => children.push(child),
                         None => {
-                            let mut children = Vec::new();
-                            children.push(child);
-                            self.children = Some(children);
+                            self.children = Some(vec![child]);
                         }
                     }
                 }
