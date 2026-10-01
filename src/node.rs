@@ -44,7 +44,7 @@ enum ExpressionTyped {
 
 struct Node {
     node_type: NodeType,
-    children: Option<Vec<Box<Node>>>,
+    children: Option<Vec<Node>>,
 }
 
 impl Node {
@@ -69,6 +69,15 @@ impl Node {
                         children: None,
                     };
                     expression = child.load_children(tail)?;
+
+                    match &mut self.children {
+                        Some(children) => children.push(child),
+                        None => {
+                            let mut children = Vec::new();
+                            children.push(child);
+                            self.children = Some(children);
+                        }
+                    }
                 }
             }
         }
