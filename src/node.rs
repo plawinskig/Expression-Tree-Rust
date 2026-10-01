@@ -43,6 +43,7 @@ enum NodeType {
     Root
 }
 
+#[derive(Debug)]
 enum ExpressionTyped {
     Token(NodeType, Box<ExpressionTyped>),
     End,
@@ -115,7 +116,21 @@ mod tests {
             ])}
         };
         
-        print!("{:#?}", correct_root);
+        println!("{:#?}", correct_root);
+
+        let expression = ExpressionTyped::Token(NodeType::Op(Operation{op_type: OperationType::Addition}), 
+            Box::new(ExpressionTyped::Token(NodeType::Op(Operation{op_type: OperationType::Multiplication}),
+                Box::new(ExpressionTyped::Token(NodeType::Val(Value { val: 1 }), 
+                    Box::new(ExpressionTyped::Token(NodeType::Val(Value { val: 2 }), 
+                        Box::new(ExpressionTyped::Token(NodeType::Val(Value { val: 3 }), 
+                            Box::new(ExpressionTyped::End)
+                        )
+                    ))
+                ))
+            ))
+        ));
+
+        println!("{:#?}", expression);
         
         //assert_eq!(load_children("     56789"), Some(5));
     }
