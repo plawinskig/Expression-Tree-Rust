@@ -70,12 +70,9 @@ impl Node {
                     };
                     expression = child.load_children(tail)?;
 
-                    match &mut self.children {
-                        Some(children) => children.push(child),
-                        None => {
-                            self.children = Some(vec![child]);
-                        }
-                    }
+                    self.children
+                        .get_or_insert_with(Vec::new)
+                        .push(child);
                 }
             }
         }
